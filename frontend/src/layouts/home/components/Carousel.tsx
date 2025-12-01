@@ -1,5 +1,4 @@
 import inter from "../../../assets/movie/peak.jpg";
-import fight from "../../../assets/movie/fight.jpg";
 import { FeaturedMovie } from "./FeaturedMovie";
 
 export const Carousel = () => {
@@ -29,57 +28,13 @@ export const Carousel = () => {
 
             <div className="carousel-item active justify-content-center">
               <div className="row d-flex justify-content-center align-items-center">
-                <div className="col-xs-6 col-sm-6 col-md-4 col-lg-12 mb-3">
-                  <div className="text-center" style={{ color: "grey" }}>
-                    <img
-                      className="rounded-3"
-                      src={inter}
-                      alt="Movie Poster"
-                      style={{
-                        width: "40rem",
-                        height: "28rem",
-                        objectFit: "cover",
-                      }}
-                    />
-                    <h4 className="mt-2 fw-bold">Intersellar</h4>
-                    <p>Starring Matthew McConaughey</p>
-                    <a
-                      href=""
-                      className="btn rounded-0 border-bottom"
-                      style={{ color: "grey" }}
-                    >
-                      RESERVE
-                    </a>
-                  </div>
-                </div>
+                <FeaturedMovie />
               </div>
             </div>
 
             <div className="carousel-item justify-content-center">
               <div className="row d-flex justify-content-center align-items-center">
-                <div className="col-xs-6 col-sm-6 col-md-4 col-lg-12 mb-3">
-                  <div className="text-center" style={{ color: "grey" }}>
-                    <img
-                      className="rounded-3"
-                      src={fight}
-                      alt="Movie Poster"
-                      style={{
-                        width: "40rem",
-                        height: "28rem",
-                        objectFit: "cover",
-                      }}
-                    />
-                    <h4 className="mt-2 fw-bold">Fight Club</h4>
-                    <p>Starring Brad Pitt and Edward Norton</p>
-                    <a
-                      href=""
-                      className="btn rounded-0 border-bottom"
-                      style={{ color: "grey" }}
-                    >
-                      RESERVE
-                    </a>
-                  </div>
-                </div>
+                <FeaturedMovie />
               </div>
             </div>
           </div>
