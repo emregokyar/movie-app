@@ -1,22 +1,37 @@
+import type React from "react";
 import _1984 from "../../../assets/books/1984.jpg";
+import type { BookModel } from "../../../models/BookModel";
 
-export const FeaturedMovie = () => {
+export const FeaturedBook: React.FC<{ book: BookModel }> = (props) => {
   return (
     <>
       <div className="col-xs-6 col-sm-6 col-md-3 mb-3">
         <div className="text-center" style={{ color: "grey" }}>
-          <img
-            className="rounded-3 border"
-            src={_1984}
-            alt="Book Poster"
-            style={{
-              width: "16rem",
-              height: "25rem",
-              objectFit: "cover",
-            }}
-          />
-          <h4 className="mt-2 fw-bold">1984</h4>
-          <p>By George Orwell</p>
+          {props.book.img ? (
+            <img
+              className="rounded-3 border"
+              src={props.book.img}
+              alt="Book Poster"
+              style={{
+                width: "16rem",
+                height: "25rem",
+                objectFit: "cover",
+              }}
+            />
+          ) : (
+            <img
+              className="rounded-3 border"
+              src={_1984}
+              alt="Book Poster"
+              style={{
+                width: "16rem",
+                height: "25rem",
+                objectFit: "cover",
+              }}
+            />
+          )}
+          <h4 className="mt-2 fw-bold">{props.book.title}</h4>
+          <p>{props.book.author}</p>
           <a
             href=""
             className="btn border-bottom rounded-0"

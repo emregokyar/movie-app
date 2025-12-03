@@ -1,7 +1,7 @@
 export const Heroes = () => {
   return (
     <>
-      <div className="pt-5 container" style={{ color: "grey" }}>
+      <div className="pt-lg-5 container" style={{ color: "grey" }}>
         <div className="d-none d-lg-block pt-5 mt-5">
           <div className="row g-0 mt-5 ">
             <div className="col-sm-6 col-md-6 ">

@@ -1,17 +1,11 @@
 package com.book_library.config;
 
-import com.book_library.entity.Book;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
-import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
-import org.springframework.http.HttpMethod;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-
+/*
 @Configuration
 public class DataRestConfig implements RepositoryRestConfigurer {
-    private final String allowedOrigins = "https://localhost:3000";
+    private final String allowedOrigins = "http://localhost:5173";
 
-    public void configureRepoRestConfiguration(RepositoryRestConfiguration repositoryRestConfiguration, CorsRegistry cors) {
+    public void configureRepositoryRestConfiguration(RepositoryRestConfiguration repositoryRestConfiguration, CorsRegistry cors) {
         HttpMethod[] unsupportedActions = {HttpMethod.DELETE, HttpMethod.POST, HttpMethod.PATCH, HttpMethod.PUT};
         repositoryRestConfiguration.exposeIdsFor(Book.class);
         disableHttpMethods(Book.class, repositoryRestConfiguration, unsupportedActions);
@@ -26,3 +20,4 @@ public class DataRestConfig implements RepositoryRestConfigurer {
                 .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedActions));
     }
 }
+ */

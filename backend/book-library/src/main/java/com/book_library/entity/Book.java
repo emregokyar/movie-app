@@ -13,6 +13,7 @@ public class Book {
     private String title;
     private String author;
     private String description;
+    private String category;
     private int copies;
     private int copiesAvailable;
     private String img;

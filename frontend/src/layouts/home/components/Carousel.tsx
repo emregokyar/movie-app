@@ -1,7 +1,63 @@
 import _1984 from "../../../assets/books/1984.jpg";
-import { FeaturedMovie } from "./FeaturedBook";
+import { FeaturedBook } from "./FeaturedBook";
+import { useEffect, useState } from "react";
+import { BookModel } from "../../../models/BookModel";
 
 export const Carousel = () => {
+  const [books, setBooks] = useState<BookModel[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      const baseUrl: string = "http://localhost:8080/books";
+      const response = await fetch(baseUrl);
+
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+      const responseJson = await response.json();
+      const loadedBooks: BookModel[] = [];
+      for (const key in responseJson) {
+        loadedBooks.push(
+          new BookModel(
+            responseJson[key].id,
+            responseJson[key].title,
+            responseJson[key].author,
+            responseJson[key].description,
+            responseJson[key].copies,
+            responseJson[key].copiesAvailable,
+            responseJson[key].category,
+            responseJson[key].img
+          )
+        );
+      }
+      setBooks(loadedBooks);
+      setIsLoading(false);
+    };
+
+    fetchBooks().catch((error: Error) => {
+      setError(error.message);
+      setIsLoading(false);
+    });
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="container m-5 text-center">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container m-5 text-center">
+        <p>{error}</p>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className=" mt-5 mb-5" style={{ height: 550, color: "grey" }}>
@@ -19,25 +75,25 @@ export const Carousel = () => {
           <div className="carousel-inner">
             <div className="carousel-item justify-content-center">
               <div className="row d-flex justify-content-center align-items-center">
-                <FeaturedMovie />
-                <FeaturedMovie />
-                <FeaturedMovie />
-              </div>
-            </div>
-
-            <div className="carousel-item active justify-content-center">
-              <div className="row d-flex justify-content-center align-items-center">
-                <FeaturedMovie />
-                <FeaturedMovie />
-                <FeaturedMovie />
+                {books.slice(0, 3).map((book) => (
+                  <FeaturedBook book={book} key={book.id} />
+                ))}
               </div>
             </div>
 
             <div className="carousel-item justify-content-center">
               <div className="row d-flex justify-content-center align-items-center">
-                <FeaturedMovie />
-                <FeaturedMovie />
-                <FeaturedMovie />
+                {books.slice(3, 6).map((book) => (
+                  <FeaturedBook book={book} key={book.id} />
+                ))}
+              </div>
+            </div>
+
+            <div className="carousel-item justify-content-center active">
+              <div className="row d-flex justify-content-center align-items-center">
+                {books.slice(6, 9).map((book) => (
+                  <FeaturedBook book={book} key={book.id} />
+                ))}
               </div>
             </div>
           </div>
@@ -92,29 +148,7 @@ export const Carousel = () => {
         {/*Mobile*/}
         <div className="d-lg-none mt-3">
           <div className="row d-flex justify-content-center align-item-center">
-            <div className="text-center">
-              <img
-                className="rounded-3 border"
-                src={_1984}
-                alt="Movie Poster"
-                style={{
-                  width: "20rem",
-                  height: "30rem",
-                  objectFit: "cover",
-                }}
-              />
-              <h6 className="mt-2">
-                <b>1984</b>
-              </h6>
-              <p>By George Orwell</p>
-              <a
-                href=""
-                className="btn rounded-0 border-bottom"
-                style={{ color: "grey" }}
-              >
-                RESERVE
-              </a>
-            </div>
+            <FeaturedBook book={books[1]} key={books[1].id} />
           </div>
         </div>
 
