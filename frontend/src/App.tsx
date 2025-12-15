@@ -24,7 +24,7 @@ export const App = () => {
               <SearchBooksPage />
             </Route>
 
-            <Route>
+            <Route path={"/checkout/:bookId"}>
               <BookCheckoutPage />
             </Route>
           </Switch>

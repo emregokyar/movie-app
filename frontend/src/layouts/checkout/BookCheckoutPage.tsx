@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { BookModel } from "../../models/BookModel";
 import { SpinnerLoading } from "../utils/SpinnerLoading";
 import _1984 from "../../assets/books/1984.jpg";
+import { StarReview } from "../utils/StarReview";
+import { CheckoutAndReviewBox } from "./CheckoutAndReviewBox";
 
 export const BookCheckoutPage = () => {
   const [book, setBook] = useState<BookModel>();
@@ -61,8 +63,8 @@ export const BookCheckoutPage = () => {
               {
                 <img
                   src={book?.img ? book?.img : _1984}
-                  width={"350"}
-                  height={"500"}
+                  width={"226"}
+                  height={"349"}
                   alt="Book"
                   style={{ objectFit: "cover" }}
                   className="rounded-3 border"
@@ -77,8 +79,10 @@ export const BookCheckoutPage = () => {
                 <p className="lead" style={{ color: "gray" }}>
                   {book?.description}
                 </p>
+                <StarReview rating={4} size={32} />
               </div>
             </div>
+            <CheckoutAndReviewBox book={book} mobile={false} />
           </div>
           <hr style={{ borderColor: "gray" }} />
         </div>
@@ -87,8 +91,8 @@ export const BookCheckoutPage = () => {
             {
               <img
                 src={book?.img ? book?.img : _1984}
-                width={"270"}
-                height={"410"}
+                width={"226"}
+                height={"349"}
                 alt="Book"
                 style={{ objectFit: "cover" }}
                 className="rounded-3 border"
@@ -103,8 +107,10 @@ export const BookCheckoutPage = () => {
               <p className="lead" style={{ color: "gray" }}>
                 {book?.description}
               </p>
+              <StarReview rating={4} size={32} />
             </div>
           </div>
+          <CheckoutAndReviewBox book={book} mobile={true} />
           <hr style={{ borderColor: "gray" }} />
         </div>
       </div>
