@@ -35,4 +35,10 @@ public class BookController {
                                         @RequestParam(value = "category", required = false) String category) {
         return bookService.getBooksBySearch(title, page, size, category);
     }
+
+    @GetMapping("/{bookId}")
+    @ResponseStatus(HttpStatus.OK)
+    public Book retrieveSingleBook(@PathVariable(value = "bookId") Integer bookId) {
+        return bookService.getBookInfo(bookId);
+    }
 }

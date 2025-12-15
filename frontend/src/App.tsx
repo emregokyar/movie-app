@@ -4,6 +4,7 @@ import { Footer } from "./layouts/footer/Footer";
 import { Navbar } from "./layouts/header/Navbar";
 import { HomePage } from "./layouts/home/HomePage";
 import { SearchBooksPage } from "./layouts/search/SearchBookPage";
+import { BookCheckoutPage } from "./layouts/checkout/BookCheckoutPage";
 
 export const App = () => {
   return (
@@ -21,6 +22,10 @@ export const App = () => {
             </Route>
             <Route path="/search">
               <SearchBooksPage />
+            </Route>
+
+            <Route>
+              <BookCheckoutPage />
             </Route>
           </Switch>
         </div>

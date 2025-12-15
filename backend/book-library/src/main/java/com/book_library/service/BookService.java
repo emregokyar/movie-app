@@ -60,4 +60,10 @@ public class BookService {
 
         return new BookListResponse(totalPages, totalBooks, bookList);
     }
+
+    @Transactional(readOnly = true)
+    public Book getBookInfo(Integer bookId) {
+        Optional<Book> retrievedBook = bookRepository.findById(bookId.longValue());
+        return retrievedBook.orElseGet(Book::new);
+    }
 }
