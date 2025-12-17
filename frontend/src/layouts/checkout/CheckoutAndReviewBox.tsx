@@ -47,7 +47,7 @@ export const CheckoutAndReviewBox: React.FC<{
             Sign in
           </Link>
           <hr style={{ borderColor: "gray" }} />
-          <p className="mt-3 d-flex justify-content-center">
+          <p className="mt-3 d-flex justify-content-center text-center">
             This number can be changed until order has been complete.
           </p>
           <p className="d-flex justify-content-center">

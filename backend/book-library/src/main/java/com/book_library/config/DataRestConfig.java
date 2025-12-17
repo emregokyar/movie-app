@@ -10,6 +10,9 @@ public class DataRestConfig implements RepositoryRestConfigurer {
         repositoryRestConfiguration.exposeIdsFor(Book.class);
         disableHttpMethods(Book.class, repositoryRestConfiguration, unsupportedActions);
 
+        repositoryRestConfiguration.exposeIdsFor(Review.class);
+        disableHttpMethods(Review.class, repositoryRestConfiguration, unsupportedActions);
+
         cors.addMapping(repositoryRestConfiguration.getBasePath() + "/**")
                 .allowedOrigins(allowedOrigins);
     }
