@@ -1,4 +1,9 @@
+import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from "react-router-dom";
+
 export const BookServices = () => {
+  const { isAuthenticated } = useAuth0();
+
   return (
     <>
       <div
@@ -16,13 +21,27 @@ export const BookServices = () => {
               help!
             </p>
             <div className="d-grid gap-2 justify-content-md-start mb-4 mb-lg-3">
-              <a
-                href=""
-                className="btn btn-lg rounded-0 border-bottom"
-                style={{ color: "grey" }}
-              >
-                Sing up
-              </a>
+              {isAuthenticated ? (
+                <>
+                  <Link
+                    to={"/explore"}
+                    className="btn btn-lg rounded-0 border-bottom"
+                    style={{ color: "grey" }}
+                  >
+                    Explore top books
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to={"/login"}
+                    className="btn btn-lg rounded-0 border-bottom"
+                    style={{ color: "grey" }}
+                  >
+                    Sing up
+                  </Link>
+                </>
+              )}
             </div>
           </div>
           <div className="col-lg-4 offset-lg-1 shadow-lg lost-image rounded-3"></div>

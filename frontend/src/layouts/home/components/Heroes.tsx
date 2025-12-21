@@ -1,4 +1,9 @@
+import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from "react-router-dom";
+
 export const Heroes = () => {
+  const { isAuthenticated } = useAuth0();
+
   return (
     <>
       <div className="pt-lg-5 container" style={{ color: "grey" }}>
@@ -17,13 +22,28 @@ export const Heroes = () => {
                   favorite topics, we'll help you discover books that perfectly
                   match your journey.
                 </p>
-                <a
-                  className="btn btn-lg border-bottom rounded-0"
-                  style={{ color: "grey" }}
-                  href=""
-                >
-                  Sign up
-                </a>
+
+                {isAuthenticated ? (
+                  <>
+                    <Link
+                      className="btn btn-lg border-bottom rounded-0"
+                      style={{ color: "grey" }}
+                      to={"/search"}
+                    >
+                      Explore top books
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      className="btn btn-lg border-bottom rounded-0"
+                      style={{ color: "grey" }}
+                      to={"/login"}
+                    >
+                      Sign up
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -59,13 +79,27 @@ export const Heroes = () => {
                   knowledge, we’ll help you discover content that fits your
                   journey perfectly.
                 </p>
-                <a
-                  href=""
-                  className="btn btn-lg border-bottom rounded-0"
-                  style={{ color: "grey" }}
-                >
-                  Sing up
-                </a>
+                {isAuthenticated ? (
+                  <>
+                    <Link
+                      className="btn btn-lg border-bottom rounded-0"
+                      style={{ color: "grey" }}
+                      to={"/search"}
+                    >
+                      Explore top books
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      className="btn btn-lg border-bottom rounded-0"
+                      style={{ color: "grey" }}
+                      to={"/login"}
+                    >
+                      Sign up
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
             <div className="m-2">

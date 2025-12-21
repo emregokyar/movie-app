@@ -1,6 +1,7 @@
 import type React from "react";
 import _1984 from "../../../assets/books/1984.jpg";
 import type { BookModel } from "../../../models/BookModel";
+import { Link } from "react-router-dom";
 
 export const FeaturedBook: React.FC<{ book: BookModel }> = (props) => {
   return (
@@ -32,13 +33,14 @@ export const FeaturedBook: React.FC<{ book: BookModel }> = (props) => {
           )}
           <h4 className="mt-2 fw-bold">{props.book.title}</h4>
           <p>{props.book.author}</p>
-          <a
+          <Link
             href=""
             className="btn border-bottom rounded-0"
             style={{ color: "grey" }}
+            to={`/checkout/${props.book.id}`}
           >
             RESERVE
-          </a>
+          </Link>
         </div>
       </div>
     </>
