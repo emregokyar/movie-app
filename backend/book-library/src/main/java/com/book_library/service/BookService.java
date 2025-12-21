@@ -1,22 +1,64 @@
 package com.book_library.service;
 
 import com.book_library.entity.Book;
+import com.book_library.entity.Checkout;
 import com.book_library.repository.BookRepository;
+import com.book_library.repository.CheckoutRepository;
 import com.book_library.response_dto.BookListResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class BookService {
     private final BookRepository bookRepository;
+    private final CheckoutRepository checkoutRepository;
 
     @Autowired
-    public BookService(BookRepository bookRepository) {
+    public BookService(BookRepository bookRepository, CheckoutRepository checkoutRepository) {
         this.bookRepository = bookRepository;
+        this.checkoutRepository = checkoutRepository;
+    }
+
+    @Transactional(readOnly = false)
+    public Book checkoutBook(String userEmail, Long bookId) throws Exception {
+        Optional<Book> book = bookRepository.findById(bookId);
+        Checkout validateCheckout = checkoutRepository.findByUserEmailAndBookId(userEmail, bookId);
+
+        // Checking availability and if user is already taking the book or
+        if (book.isEmpty() || validateCheckout != null || book.get().getCopiesAvailable() <= 0) {
+            throw new Exception("Book doesn't exist or already checked out by user!");
+        }
+
+        // Removing a copy
+        book.get().setCopiesAvailable(book.get().getCopiesAvailable() - 1);
+        bookRepository.save(book.get());
+
+        // Creating a checkout object
+        Checkout checkout = new Checkout(
+                userEmail,
+                LocalDate.now().toString(),
+                LocalDate.now().plusDays(7).toString(),
+                book.get().getId()
+        );
+        checkoutRepository.save(checkout);
+
+        return book.get();
+    }
+
+    @Transactional(readOnly = true)
+    public boolean checkoutBookByUser(String userEmail, Long bookId) {
+        Checkout validateCheckout = checkoutRepository.findByUserEmailAndBookId(userEmail, bookId);
+        return validateCheckout != null;
+    }
+
+    @Transactional(readOnly = true)
+    public int currentLoansCount(String userEmail) {
+        return checkoutRepository.findBooksByUserEmail(userEmail).size();
     }
 
     @Transactional(readOnly = true)

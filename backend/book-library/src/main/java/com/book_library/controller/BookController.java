@@ -41,4 +41,22 @@ public class BookController {
     public Book retrieveSingleBook(@PathVariable(value = "bookId") Integer bookId) {
         return bookService.getBookInfo(bookId);
     }
+
+    @PutMapping("/secure/checkout")
+    public Book checkoutBook(@RequestParam Long bookId) throws Exception {
+        String userEmail = "devuser360@gmail.com";
+        return bookService.checkoutBook(userEmail, bookId);
+    }
+
+    @GetMapping("/secure/isCheckedOut/byUser")
+    public boolean checkoutByUser(@RequestParam Long bookId) {
+        String userEmail = "devuser360@gmail.com";
+        return bookService.checkoutBookByUser(userEmail, bookId);
+    }
+
+    @GetMapping("/secure/currentLoans/count")
+    public int currentLoansCount() {
+        String userEmail = "devuser360@gmail.com";
+        return bookService.currentLoansCount(userEmail);
+    }
 }
